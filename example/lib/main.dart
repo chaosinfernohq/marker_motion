@@ -49,8 +49,14 @@ class _MapScreenState extends State<MapScreen> {
     // Initialize with some markers
     _markers = {
       _createMarker(_getRandomId(), _center),
-      _createMarker(_getRandomId(), LatLng(_center.latitude + 0.005, _center.longitude + 0.005)),
-      _createMarker(_getRandomId(), LatLng(_center.latitude - 0.005, _center.longitude - 0.005)),
+      _createMarker(
+        _getRandomId(),
+        LatLng(_center.latitude + 0.005, _center.longitude + 0.005),
+      ),
+      _createMarker(
+        _getRandomId(),
+        LatLng(_center.latitude - 0.005, _center.longitude - 0.005),
+      ),
     };
   }
 
@@ -98,7 +104,9 @@ class _MapScreenState extends State<MapScreen> {
           duration: const Duration(milliseconds: 4300),
           // Set implementation
           implementation:
-              Platform.isIOS ? MotionImplementation.animation : MotionImplementation.timer,
+              Platform.isIOS
+                  ? MotionImplementation.animation
+                  : MotionImplementation.timer,
         ),
         // Builder receives animated markers
         builder: (animatedMarkers) {
@@ -134,7 +142,9 @@ class _MapScreenState extends State<MapScreen> {
 
                     setState(() {
                       // Remove a random marker
-                      final marker = _markers.elementAt(_random.nextInt(_markers.length - 1));
+                      final marker = _markers.elementAt(
+                        _random.nextInt(_markers.length - 1),
+                      );
 
                       _markers.remove(marker);
                     });

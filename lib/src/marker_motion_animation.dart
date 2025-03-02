@@ -115,8 +115,9 @@ class _MarkerMotionAnimationState extends State<MarkerMotionAnimation>
       );
 
       // Skip markers that were removed or haven’t changed position
-      if (newMarker == null || oldMarker.position == newMarker.position)
+      if (newMarker == null || oldMarker.position == newMarker.position) {
         continue;
+      }
 
       // Queue the marker for animation with its start and end positions
       _animatedMarkers[oldMarker.markerId] = AnimatedMarker(

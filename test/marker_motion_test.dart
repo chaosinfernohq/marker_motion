@@ -6,7 +6,9 @@ import 'package:marker_motion/marker_motion.dart';
 void main() {
   group('MarkerMotionAnimation tests', () {
     testWidgets('Initializes with single marker', (tester) async {
-      final motionMarkers = {Marker(markerId: MarkerId('1'), position: LatLng(37.7749, -122.4194))};
+      final motionMarkers = {
+        Marker(markerId: MarkerId('1'), position: LatLng(37.7749, -122.4194)),
+      };
 
       await tester.pumpWidget(
         MaterialApp(
@@ -112,14 +114,18 @@ void main() {
 
   group('MarkerMotionTimer tests', () {
     testWidgets('Initializes with single marker', (tester) async {
-      final motionMarkers = {Marker(markerId: MarkerId('1'), position: LatLng(37.7749, -122.4194))};
+      final motionMarkers = {
+        Marker(markerId: MarkerId('1'), position: LatLng(37.7749, -122.4194)),
+      };
 
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: MarkerMotion(
               markers: motionMarkers,
-              config: MarkerMotionConfig(implementation: MotionImplementation.timer),
+              config: MarkerMotionConfig(
+                implementation: MotionImplementation.timer,
+              ),
               builder: (markers) {
                 expect(markers.length, 1);
                 expect(markers.first.markerId, motionMarkers.first.markerId);
@@ -146,7 +152,9 @@ void main() {
           home: Scaffold(
             body: MarkerMotion(
               markers: motionMarkers,
-              config: MarkerMotionConfig(implementation: MotionImplementation.timer),
+              config: MarkerMotionConfig(
+                implementation: MotionImplementation.timer,
+              ),
               builder: (markers) {
                 expect(markers.length, 2);
                 expect(markers.first.markerId, motionMarkers.first.markerId);
@@ -166,7 +174,10 @@ void main() {
 
     testWidgets('Markers are successfully animated with timer', (tester) async {
       final initialMarkers = {
-        Marker(markerId: const MarkerId('1'), position: const LatLng(37.7749, -122.4194)),
+        Marker(
+          markerId: const MarkerId('1'),
+          position: const LatLng(37.7749, -122.4194),
+        ),
       };
 
       late Set<Marker> animatedMarkers;
@@ -190,7 +201,10 @@ void main() {
       );
 
       final updatedMarkers = {
-        Marker(markerId: const MarkerId('1'), position: const LatLng(37.9301, -122.4000)),
+        Marker(
+          markerId: const MarkerId('1'),
+          position: const LatLng(37.9301, -122.4000),
+        ),
       };
 
       await tester.pumpWidget(
@@ -217,7 +231,11 @@ void main() {
       const fullDuration = Duration(milliseconds: 3200);
 
       // Pump to halfway point
-      for (var elapsed = Duration.zero; elapsed < halfDuration; elapsed += tickInterval) {
+      for (
+        var elapsed = Duration.zero;
+        elapsed < halfDuration;
+        elapsed += tickInterval
+      ) {
         await tester.pump(tickInterval);
       }
       expect(
@@ -232,7 +250,11 @@ void main() {
       );
 
       // Pump to completion
-      for (var elapsed = halfDuration; elapsed <= fullDuration; elapsed += tickInterval) {
+      for (
+        var elapsed = halfDuration;
+        elapsed <= fullDuration;
+        elapsed += tickInterval
+      ) {
         await tester.pump(tickInterval);
       }
       // Add extra pump to ensure final state settles
