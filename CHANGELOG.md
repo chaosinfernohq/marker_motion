@@ -1,6 +1,10 @@
+## 0.1.2
+
+Fixed formatting.
+
 ## 0.1.1
 
-Reformatted code for pub points. 
+Reformatted code for pub points.
 
 ## 0.1.0
 
