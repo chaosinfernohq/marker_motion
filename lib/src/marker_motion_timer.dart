@@ -79,7 +79,9 @@ class _MarkerMotionTimerState extends State<MarkerMotionTimer> {
         (m) => m?.markerId == oldMarker.markerId,
         orElse: () => null,
       );
-      if (newMarker == null || oldMarker.position == newMarker.position) continue;
+      if (newMarker == null || oldMarker.position == newMarker.position) {
+        continue;
+      }
 
       _animatedMarkers[oldMarker.markerId] = AnimatedMarker(
         start: oldMarker.position,

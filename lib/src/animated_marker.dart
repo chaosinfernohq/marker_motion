@@ -5,7 +5,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 /// Stores the start and end positions and provides linear interpolation (lerp)
 /// for smooth transitions.
 class AnimatedMarker {
-  AnimatedMarker({required this.start, required this.end, required this.marker});
+  AnimatedMarker({
+    required this.start,
+    required this.end,
+    required this.marker,
+  });
 
   /// The marker’s starting position.
   final LatLng start;

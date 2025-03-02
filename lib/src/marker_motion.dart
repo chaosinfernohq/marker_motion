@@ -65,7 +65,11 @@ class MarkerMotion extends StatelessWidget {
           animationCurve: config.animationCurve,
         );
       case MotionImplementation.timer:
-        return MarkerMotionTimer(markers: markers, builder: builder, duration: config.duration);
+        return MarkerMotionTimer(
+          markers: markers,
+          builder: builder,
+          duration: config.duration,
+        );
     }
   }
 }

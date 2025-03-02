@@ -73,7 +73,10 @@ class _MarkerMotionAnimationState extends State<MarkerMotionAnimation>
     _controller = AnimationController(vsync: this, duration: widget.duration);
 
     // Apply the animation curve to the controller’s progress
-    _curvedAnimation = CurvedAnimation(parent: _controller, curve: widget.animationCurve);
+    _curvedAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: widget.animationCurve,
+    );
 
     // Listen for animation updates to reposition markers
     _controller.addListener(_updateAnimations);
@@ -90,7 +93,10 @@ class _MarkerMotionAnimationState extends State<MarkerMotionAnimation>
 
     // Update the animation curve if it's changed
     if (widget.animationCurve != oldWidget.animationCurve) {
-      _curvedAnimation = CurvedAnimation(parent: _controller, curve: widget.animationCurve);
+      _curvedAnimation = CurvedAnimation(
+        parent: _controller,
+        curve: widget.animationCurve,
+      );
     }
 
     // Clear everything and return early if no markers are provided
@@ -109,7 +115,8 @@ class _MarkerMotionAnimationState extends State<MarkerMotionAnimation>
       );
 
       // Skip markers that were removed or haven’t changed position
-      if (newMarker == null || oldMarker.position == newMarker.position) continue;
+      if (newMarker == null || oldMarker.position == newMarker.position)
+        continue;
 
       // Queue the marker for animation with its start and end positions
       _animatedMarkers[oldMarker.markerId] = AnimatedMarker(
@@ -149,7 +156,9 @@ class _MarkerMotionAnimationState extends State<MarkerMotionAnimation>
       final position = animatedMarker.lerp(_curvedAnimation.value);
 
       // Update the marker with its new interpolated position
-      updatedMarkers.add(animatedMarker.marker.copyWith(positionParam: position));
+      updatedMarkers.add(
+        animatedMarker.marker.copyWith(positionParam: position),
+      );
     }
 
     // Update the displayed markers and trigger a rebuild
