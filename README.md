@@ -14,15 +14,6 @@ A Flutter package for smoothly animating Google Maps markers between positions.
 - Minimal code footprint
 - Option to choose between using native flutter animations or a timer based implementation
 
-## Installation
-
-Add `marker_motion` to your `pubspec.yaml`:
-
-```yaml
-dependencies:
-  marker_motion: ^0.1.0
-```
-
 ## Usage
 
 Using MarkerMotion is as simple as wrapping your Google Maps widget with the `MarkerMotion` widget:
