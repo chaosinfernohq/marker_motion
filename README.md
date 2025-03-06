@@ -1,18 +1,15 @@
 # Marker Motion
 
-A Flutter package for smoothly animating Google Maps markers between positions.
+Animate markers in Google maps from one position to another smoothly using this flutter package.
 
 [![Pub Version](https://img.shields.io/pub/v/marker_motion)](https://pub.dev/packages/marker_motion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
 
-- Smooth animation of markers between positions
+- Automatically animate marker positions passed into the MarkerMotion widget that share a marker id
 - Customize the animation duration
-- Simple, drop-in API that works with existing Google Maps implementations
-- Performance optimized with Flutter's animation system
-- Minimal code footprint
-- Option to choose between using native flutter animations or a timer based implementation
+- Choose between an animation controller and timer based implementation depending on your needs
 
 ## Usage
 
@@ -29,7 +26,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  // Your markers that might change position
+  // The set of markers that you want to animate between multiple positions
   Set<Marker> _markers = {};
 
   @override
@@ -37,14 +34,15 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(title: Text('Animated Map Markers')),
       body: MarkerMotion(
-        // Pass your markers that may update position
+        // Pass your markers to animate them
         markers: _markers,
         // Configure the widget using the config object
         config: MarkerMotionConfig(
-          // Control animation duration (default: 3200ms)
+          // Control the animation duration (default: 3200ms)
           duration: Duration(milliseconds: 5100),
         ),
-        // Builder receives the animated markers
+        // Builder receives the animated markers that you can then pass to your
+        // GoogleMap to animate them
         builder: (markers) {
             GoogleMap(
               markers: markers,
@@ -59,7 +57,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void _updateMarkerPositions() {
-    // When you update marker positions, they will animate automatically
+    // Update the marker positions and watch them smoothly animate on your GoogleMap widget
     setState(() {
       _markers = {
         Marker(
@@ -69,7 +67,7 @@ class _MapScreenState extends State<MapScreen> {
             -122.08574 + (Random().nextDouble() - 0.5) * 0.01,
           ),
         ),
-        // Add more markers as needed
+        // Add more markers here if you want
       };
     });
   }
@@ -80,10 +78,7 @@ class _MapScreenState extends State<MapScreen> {
 
 The `MarkerMotion` widget keeps track of marker positions between state changes. When a marker's
 position changes, it smoothly animates from the old position to the new position using either 
-Flutter's animation system or a timer based animation.
-
-Both of the implementations are stateful widgets that use a builder pattern, allowing you to build 
-your Google Map widget with the updated marker positions in the builder.
+an animation controller or a timer based animation.
 
 ## Customization
 
@@ -97,91 +92,32 @@ MarkerMotion(
 )
 ```
 
-The following config options are available:
+The following config options are currently supported:
 
-### Implementation
-
-Choose whether to use a native animation controller based implementation, or to animate
-the markers using a dart Timer.
-
-You can set the implementation to either `MotionImplementation.timer` or 
-`MotionImplementation.animation` (which is the default).
-
-```dart
-MarkerMotion(
-  markers: _markers,
-  config: MarkerMotionConfig(
-    implementation: MotionImplementation.timer,
-  ),
-)
-```
-
-### Duration
-
-Control how long the animation takes. The default is set to `const Duration(milliseconds: 3200)`.
-
-```dart
-MarkerMotion(
-  markers: _markers,
-  config: MarkerMotionConfig(
-    duration: const Duration(milliseconds: 2000),
-  ),
-)
-```
-
-### Animation curve
-
-This can only be set if you're using the `MotionImplementation.animation` implementation. This
-chooses which curve you'd like to use for the animation. The default is set to `Curves.linear`.
-
-```dart
-MarkerMotion(
-  markers: _markers,
-  config: MarkerMotionConfig(
-    animationCurve: Curves.easeInOut,
-  ),
-)
-```
-
-### Frame rate
-
-This can only be set if you're using the `MotionImplementation.timer` implementation. This
-sets the frame rate for the animation. The higher the frame rate the more resource intensive
-the animation will be, so don't set this too high if you need to support lower powered devices. 
-If you're running into performance issues, this would be a good setting to lower. The default 
-frame rate is set to `60`.
-
-```dart
-MarkerMotion(
-  markers: _markers,
-  config: MarkerMotionConfig(
-    frameRate: 30,
-  ),
-)
-```
-
-## Roadmap
-
-There's no timeline on any of these features, but I'm open to PRs if you want to implement them
-yourself. If you have a suggestion of your own, start a new discussion and we'll talk about adding
-it.
-
-- Save past marker positions, so that it smoothly animates between coordinates instead of
-  immediately jumping from it's current position to the new destination.
-- Add support for specifying a polyline that markers should animate along.
-- Support animating marker's rotation and not just position.
-- Add a threshold option to the config that specifies a minimum distance updated positions must 
-  be from their previous ones in order to animate the marker.
+| name | type | default | options | description |
+|:-----|:-----|:--------|:--------|:------------|
+| implementation | MotionImplementation | MotionImplementation.animation | MotionImplementation.animation, MotionImplementation.timer | Determines whether to use an animation controller or timer to driver your marker animations |
+| duration | Duration | Duration(milliseconds: 3200) | | The duration that your animation should run for. This setting applies to both implementations.
+| animationCurve | Curve | Curves.linear | | The animation curve to use when animating your markers. Only set this if you're using MotionImplementation.animation. |
+| frameRate | int | 60 | | The frame rate you want to run your animation at. This determines how often the marker's position will be updated. Only use the if you're using MotionImplementation.timer. |
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a pull request.
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create your feature branch (`git checkout -b feat/add-marker-rotations`)
+3. Commit your changes (`git commit -m 'Animate rotations for markers'`)
+4. Push to the branch (`git push origin feature/add-marker-rotations`)
+5. Open a pull request
+
+## Features to consider working on
+
+I might be working on some of these at the moment, so let me know if you plan to tackle one of them so we can coordinate.
+
+- Animating marker's rotation
+- Animating the markers along a given polyline even if the position is off by a bit
+- Add a minimum distance that new positions must be greater than before triggering marker animations
 
 ## License
 
