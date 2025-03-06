@@ -1,3 +1,8 @@
+## 0.1.3
+
+- Make sure that the frame rate is between 1 - 120 (inclusive).
+- Update the README
+
 ## 0.1.2
 
 Fixed formatting.

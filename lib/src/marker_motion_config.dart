@@ -11,9 +11,9 @@ class MarkerMotionConfig {
          implementation == MotionImplementation.timer || frameRate == 60,
          'frameRate should only be set when using MotionImplementation.timer',
        ),
+       assert(frameRate >= 1 && frameRate <= 120, 'frameRate must be between 1 and 120'),
        assert(
-         implementation == MotionImplementation.animation ||
-             animationCurve == Curves.linear,
+         implementation == MotionImplementation.animation || animationCurve == Curves.linear,
          'animationCurve should only be set when using MotionImplementation.animation',
        );
 

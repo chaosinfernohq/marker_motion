@@ -97,9 +97,9 @@ The following config options are currently supported:
 | name | type | default | options | description |
 |:-----|:-----|:--------|:--------|:------------|
 | implementation | MotionImplementation | MotionImplementation.animation | MotionImplementation.animation, MotionImplementation.timer | Determines whether to use an animation controller or timer to driver your marker animations |
-| duration | Duration | Duration(milliseconds: 3200) | | The duration that your animation should run for. This setting applies to both implementations.
-| animationCurve | Curve | Curves.linear | | The animation curve to use when animating your markers. Only set this if you're using MotionImplementation.animation. |
-| frameRate | int | 60 | | The frame rate you want to run your animation at. This determines how often the marker's position will be updated. Only use the if you're using MotionImplementation.timer. |
+| duration | Duration | Duration(milliseconds: 3200) | Any duration | The duration that your animation should run for. This setting applies to both implementations.
+| animationCurve | Curve | Curves.linear | Any animation curve | The animation curve to use when animating your markers. Only set this if you're using MotionImplementation.animation. |
+| frameRate | int | 60 | 1 - 120 | The frame rate you want to run your animation at. This determines how often the marker's position will be updated. Only use the if you're using MotionImplementation.timer. |
 
 ## Contributing
 
